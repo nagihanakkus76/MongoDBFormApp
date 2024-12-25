@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDBFormApp.Entities;
+using MongoDBFormApp.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,14 +19,22 @@ namespace MongoDBFormApp
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        CustomerOperations customerOperations = new CustomerOperations();
+        private void btnCustomerCreate_Click(object sender, EventArgs e)
         {
+            var customer = new Customer()
+            {
+                CustomerName = txtCustomerName.Text,
+                CustomerSurname = txtCustomerSurname.Text,
+                CustomerCity = txtCustomerCity.Text,
+                CustomerBalance = decimal.Parse(txtCustomerBalance.Text),
+                CustomerShoppingCount = int.Parse(txtCustomerShoppingCount.Text),    
+            };
 
+            customerOperations.AddCustomer(customer);
+            MessageBox.Show("Müşteri Ekleme İşlemi Başarıyla Gerçekleştirildi.","Uyarı",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
