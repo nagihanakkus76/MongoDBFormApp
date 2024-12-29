@@ -206,6 +206,7 @@
             this.btnCustomerUpdate.TabIndex = 15;
             this.btnCustomerUpdate.Text = "Güncelle";
             this.btnCustomerUpdate.UseVisualStyleBackColor = false;
+            this.btnCustomerUpdate.Click += new System.EventHandler(this.btnCustomerUpdate_Click);
             // 
             // dataGridView1
             // 

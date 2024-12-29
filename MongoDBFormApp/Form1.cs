@@ -47,5 +47,21 @@ namespace MongoDBFormApp
             customerOperations.DeleteCustomer(customerId);
             MessageBox.Show("Müşteri silme işlemi başarılı bir şekilde tamamlanmıştır.","Uyarı",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
+
+        private void btnCustomerUpdate_Click(object sender, EventArgs e)
+        {
+            string customerId = txtCustomerId.Text;
+            var updateCustomer = new Customer()
+            {
+                CustomerId = customerId,
+                CustomerName = txtCustomerName.Text,
+                CustomerSurname = txtCustomerSurname.Text,
+                CustomerCity = txtCustomerCity.Text,
+                CustomerBalance = decimal.Parse(txtCustomerBalance.Text),
+                CustomerShoppingCount = int.Parse(txtCustomerShoppingCount.Text),
+            };
+            customerOperations.UpdateCustomer(updateCustomer);
+            MessageBox.Show("Müşteri güncelleme işlemi başarılı bir şekilde tamamlanmıştır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
