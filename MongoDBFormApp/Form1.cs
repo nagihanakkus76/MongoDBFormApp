@@ -63,5 +63,12 @@ namespace MongoDBFormApp
             customerOperations.UpdateCustomer(updateCustomer);
             MessageBox.Show("Müşteri güncelleme işlemi başarılı bir şekilde tamamlanmıştır.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void btnGetByCustomerId_Click(object sender, EventArgs e)
+        {
+            string id = txtCustomerId.Text;
+            Customer customers = customerOperations.GetCustomerById(id);
+            dataGridView1.DataSource = new List<Customer> { customers };
+        }
     }
 }

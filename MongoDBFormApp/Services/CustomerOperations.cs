@@ -68,5 +68,24 @@ namespace MongoDBFormApp.Services
             customerCollection.UpdateOne(filter, updatedValue);
         }
 
-   }
+        public Customer GetCustomerById(string id)
+        {
+            var connection = new MongoDbConnection();
+            var customerCollection = connection.GetCustomersCollection();
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
+            var result = customerCollection.Find(filter).FirstOrDefault();
+
+            return new Customer
+            {
+                CustomerId = id,
+                CustomerName = result["CustomerName"].ToString(),
+                CustomerSurname = result["CustomerSurname"].ToString(),
+                CustomerCity = result["CustomerCity"].ToString(),
+                CustomerBalance = decimal.Parse(result["CustomerBalance"].ToString()),
+                CustomerShoppingCount = int.Parse(result["CustomerShoppingCount"].ToString())
+            };
+
+        }
+
+    }
 }  
