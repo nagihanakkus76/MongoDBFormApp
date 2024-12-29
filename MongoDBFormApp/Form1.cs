@@ -35,6 +35,10 @@ namespace MongoDBFormApp
             MessageBox.Show("Müşteri Ekleme İşlemi Başarıyla Gerçekleştirildi.","Uyarı",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
-        
+        private void btnCustomerList_Click(object sender, EventArgs e)
+        {
+            List<Customer> customers = new CustomerOperations().GetAllCustomer();
+            dataGridView1.DataSource = customers;
+        }
     }
 }

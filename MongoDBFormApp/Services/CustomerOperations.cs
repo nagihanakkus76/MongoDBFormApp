@@ -1,5 +1,7 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using MongoDBFormApp.Entities;
+using System.Collections.Generic;
 
 namespace MongoDBFormApp.Services
 {
@@ -20,6 +22,28 @@ namespace MongoDBFormApp.Services
             };
 
             customerCollection.InsertOne(document);
+        }
+    
+        public List<Customer> GetAllCustomer() 
+        {
+            var connection = new MongoDbConnection();
+            var customerCollection = connection.GetCustomersCollection();
+
+            var customers = customerCollection.Find(new BsonDocument()).ToList();
+            List<Customer> customerList = new List<Customer>(); 
+            foreach (var customer in customers)
+            {
+                customerList.Add(new Customer
+                {
+                    CustomerId = customer["_id"].ToString(),
+                    CustomerName = customer["CustomerName"].ToString(),
+                    CustomerSurname = customer["CustomerSurname"].ToString(),
+                    CustomerCity = customer["CustomerCity"].ToString(),
+                    CustomerBalance = decimal.Parse(customer["CustomerBalance"].ToString()),
+                    CustomerShoppingCount = int.Parse(customer["CustomerShoppingCount"].ToString())
+                });
+            }
+            return customerList;
         }
     }
 }
