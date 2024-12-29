@@ -193,6 +193,7 @@
             this.btnCustomerDelete.TabIndex = 14;
             this.btnCustomerDelete.Text = "Sil";
             this.btnCustomerDelete.UseVisualStyleBackColor = false;
+            this.btnCustomerDelete.Click += new System.EventHandler(this.btnCustomerDelete_Click);
             // 
             // btnCustomerUpdate
             // 

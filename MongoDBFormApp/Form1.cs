@@ -40,5 +40,12 @@ namespace MongoDBFormApp
             List<Customer> customers = new CustomerOperations().GetAllCustomer();
             dataGridView1.DataSource = customers;
         }
+
+        private void btnCustomerDelete_Click(object sender, EventArgs e)
+        {
+            string customerId = txtCustomerId.Text;
+            customerOperations.DeleteCustomer(customerId);
+            MessageBox.Show("Müşteri silme işlemi başarılı bir şekilde tamamlanmıştır.","Uyarı",MessageBoxButtons.OK,MessageBoxIcon.Information);
+        }
     }
 }

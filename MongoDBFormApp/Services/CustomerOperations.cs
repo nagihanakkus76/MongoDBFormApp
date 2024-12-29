@@ -23,14 +23,14 @@ namespace MongoDBFormApp.Services
 
             customerCollection.InsertOne(document);
         }
-    
-        public List<Customer> GetAllCustomer() 
+
+        public List<Customer> GetAllCustomer()
         {
             var connection = new MongoDbConnection();
             var customerCollection = connection.GetCustomersCollection();
 
             var customers = customerCollection.Find(new BsonDocument()).ToList();
-            List<Customer> customerList = new List<Customer>(); 
+            List<Customer> customerList = new List<Customer>();
             foreach (var customer in customers)
             {
                 customerList.Add(new Customer
@@ -45,5 +45,15 @@ namespace MongoDBFormApp.Services
             }
             return customerList;
         }
+
+        public void DeleteCustomer(string id)
+        {
+            var connection = new MongoDbConnection();
+            var customerCollection = connection.GetCustomersCollection();
+            var deletedValue = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
+            customerCollection.DeleteOne(deletedValue);
+        }
+
+       
     }
-}
+}  
